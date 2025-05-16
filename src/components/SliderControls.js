@@ -1,3 +1,4 @@
+// src/components/SliderControls.js
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
@@ -8,18 +9,20 @@ config.autoAddCss = false;
 
 function SliderControls({ onNext, onPrev }) {
   return (
-    <div className="flex justify-center mt-8 space-x-4">
+    <div className="flex space-x-2">
       <button
-        className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-300"
+        className="bg-gray-800 bg-opacity-50 hover:bg-opacity-70 text-white rounded-md p-2"
         onClick={onPrev}
+        aria-label="Previous Slide"
       >
-        <FontAwesomeIcon icon={faChevronLeft} className="mr-2" /> Previous
+        <FontAwesomeIcon icon={faChevronLeft} />
       </button>
       <button
-        className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-300"
+        className="bg-gray-800 bg-opacity-50 hover:bg-opacity-70 text-white rounded-md p-2"
         onClick={onNext}
+        aria-label="Next Slide"
       >
-        Next <FontAwesomeIcon icon={faChevronRight} className="ml-2" />
+        <FontAwesomeIcon icon={faChevronRight} />
       </button>
     </div>
   );

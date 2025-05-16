@@ -1,19 +1,14 @@
+// src/components/ListItem.js
 import React from 'react';
 
 function ListItem({ item }) {
   return (
-    <div className="w-full flex-shrink-0 p-6 md:p-8">
-      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-        <img
-          src={`https://source.unsplash.com/random/1200x600?${item.title.split(' ').join('+')}`}
-          alt={item.title}
-          className="w-full h-64 object-cover"
-        />
-        <div className="p-6">
-          <h3 className="text-xl font-semibold text-textPrimary mb-3">{item.title}</h3>
-          <p className="text-textSecondary text-sm leading-relaxed">{item.description}</p>
-        </div>
-      </div>
+    <div className="w-full flex-shrink-0 h-full">
+      <img
+        src={`https://source.unsplash.com/random/1200x600?abstract&sig=${item.id}`}
+        alt={item.title}
+        className="w-full h-full object-cover"
+      />
     </div>
   );
 }

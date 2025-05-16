@@ -1,20 +1,19 @@
+// src/App.js
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import ListItemCarousel from './components/ListItemCarousel';
 import ListThumbnailCarousel from './components/ListThumbnailCarousel';
 import SliderControls from './components/SliderControls';
-import ActiveContent from './components/ActiveContent';
 
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const items = [
-    { id: 1, title: 'Innovative Solutions', description: 'Discover our cutting-edge approaches to modern challenges.' },
-    { id: 2, title: 'Strategic Partnerships', description: 'Building strong collaborations for mutual growth and success.' },
-    { id: 3, title: 'Sustainable Practices', description: 'Committed to environmentally responsible operations and solutions.' },
-    { id: 4, title: 'Customer-Centric Approach', description: 'Prioritizing client needs and delivering exceptional experiences.' },
-    { id: 5, title: 'Data-Driven Insights', description: 'Leveraging analytics to inform decisions and drive innovation.' },
-    { id: 6, title: 'Global Market Reach', description: 'Expanding our influence and serving clients worldwide.' },
-  ];
+  const [items, setItems] = useState([
+    { id: 1, title: 'Modern Design', description: 'Explore contemporary design trends.' },
+    { id: 2, title: 'Creative Ideas', description: 'Discover innovative and inspiring concepts.' },
+    { id: 3, title: 'Unique Solutions', description: 'Presenting tailored solutions for your needs.' },
+    { id: 4, title: 'Stylish Elements', description: 'Showcasing elegant and fashionable components.' },
+    { id: 5, title: 'Inspiring Visions', description: 'Sharing creative visions for the future.' },
+  ]);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
@@ -28,32 +27,33 @@ function App() {
     setCurrentIndex(index);
   };
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      nextSlide();
-    }, 5000); // Auto-run every 5 seconds
-
-    return () => clearInterval(intervalId); // Cleanup on unmount
-  }, []);
-
   return (
-    <div className="bg-neutral min-h-screen font-sans text-textPrimary">
+    <div className="bg-black min-h-screen text-white font-sans">
       <Header />
-      <div className="container mx-auto py-12 px-4 md:px-0">
-        <div className="shadow-xl rounded-xl overflow-hidden">
+      <div className="relative container mx-auto px-4 py-12">
+        <div className="relative rounded-lg overflow-hidden shadow-xl">
+          <div className="absolute inset-0 bg-black opacity-40"></div>
           <ListItemCarousel currentIndex={currentIndex} items={items} />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full px-8">
+            <div className="text-sm text-gray-300 uppercase tracking-widest mb-2">Showcase</div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{items[currentIndex]?.title}</h2>
+            <p className="text-gray-300 leading-relaxed max-w-lg mx-auto">{items[currentIndex]?.description}</p>
+          </div>
+          <div className="absolute top-1/2 right-4 transform -translate-y-1/2 flex space-x-2">
+            <SliderControls onNext={nextSlide} onPrev={prevSlide} />
+          </div>
         </div>
-        <ListThumbnailCarousel
-          activeIndex={currentIndex}
-          onItemClick={handleThumbnailClick}
-          thumbnails={items.map((item, index) => ({
-            id: item.id,
-            imageUrl: `https://via.placeholder.com/120/${index % 5 === 0 ? '283593' : index % 5 === 1 ? '43A047' : index % 5 === 2 ? 'F9A825' : index % 5 === 3 ? '1E88E5' : '757575'}/FFFFFF?Text=Item${index + 1}`,
-            alt: `Thumbnail ${item.id}`,
-          }))}
-        />
-        <SliderControls onNext={nextSlide} onPrev={prevSlide} />
-        <ActiveContent activeItem={items[currentIndex]} />
+        <div className="mt-8 overflow-x-auto">
+          <ListThumbnailCarousel
+            activeIndex={currentIndex}
+            onItemClick={handleThumbnailClick}
+            thumbnails={items.map((item, index) => ({
+              id: item.id,
+              imageUrl: `https://source.unsplash.com/random/400x250?abstract&sig=${index}`,
+              alt: `Thumbnail ${item.title}`,
+            }))}
+          />
+        </div>
       </div>
     </div>
   );
