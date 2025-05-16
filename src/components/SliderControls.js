@@ -10,13 +10,13 @@ function SliderControls({ onNext, onPrev }) {
   return (
     <div className="flex justify-center mt-8 space-x-4">
       <button
-        className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow-md transition-colors duration-300"
+        className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-300"
         onClick={onPrev}
       >
         <FontAwesomeIcon icon={faChevronLeft} className="mr-2" /> Previous
       </button>
       <button
-        className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-full shadow-md transition-colors duration-300"
+        className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-300"
         onClick={onNext}
       >
         Next <FontAwesomeIcon icon={faChevronRight} className="ml-2" />

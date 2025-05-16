@@ -4,17 +4,16 @@ import ListItemCarousel from './components/ListItemCarousel';
 import ListThumbnailCarousel from './components/ListThumbnailCarousel';
 import SliderControls from './components/SliderControls';
 import ActiveContent from './components/ActiveContent';
-import RunningElement from './components/RunningElement';
 
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const items = [
-    { id: 1, title: 'Modern Kitchen Design', description: 'Explore our latest contemporary kitchen styles.' },
-    { id: 2, title: 'Minimalist Living Room', description: 'Discover the beauty of simplicity in your living space.' },
-    { id: 3, title: 'Cozy Bedroom Retreat', description: 'Create your personal sanctuary with our cozy bedroom ideas.' },
-    { id: 4, title: 'Functional Home Office', description: 'Design a productive and stylish home office setup.' },
-    { id: 5, title: 'Elegant Bathroom Ideas', description: 'Transform your bathroom into a spa-like experience.' },
-    { id: 6, title: 'Outdoor Patio Inspiration', description: 'Extend your living space with our inspiring patio designs.' },
+    { id: 1, title: 'Innovative Solutions', description: 'Discover our cutting-edge approaches to modern challenges.' },
+    { id: 2, title: 'Strategic Partnerships', description: 'Building strong collaborations for mutual growth and success.' },
+    { id: 3, title: 'Sustainable Practices', description: 'Committed to environmentally responsible operations and solutions.' },
+    { id: 4, title: 'Customer-Centric Approach', description: 'Prioritizing client needs and delivering exceptional experiences.' },
+    { id: 5, title: 'Data-Driven Insights', description: 'Leveraging analytics to inform decisions and drive innovation.' },
+    { id: 6, title: 'Global Market Reach', description: 'Expanding our influence and serving clients worldwide.' },
   ];
 
   const nextSlide = () => {
@@ -41,7 +40,7 @@ function App() {
     <div className="bg-neutral min-h-screen font-sans text-textPrimary">
       <Header />
       <div className="container mx-auto py-12 px-4 md:px-0">
-        <div className="shadow-lg rounded-xl overflow-hidden">
+        <div className="shadow-xl rounded-xl overflow-hidden">
           <ListItemCarousel currentIndex={currentIndex} items={items} />
         </div>
         <ListThumbnailCarousel
@@ -49,15 +48,12 @@ function App() {
           onItemClick={handleThumbnailClick}
           thumbnails={items.map((item, index) => ({
             id: item.id,
-            imageUrl: `https://via.placeholder.com/150/${index % 5 === 0 ? '4285F4' : index % 5 === 1 ? 'DB4437' : index % 5 === 2 ? 'F4B400' : index % 5 === 3 ? '0F9D58' : '9E9E9E'}/FFFFFF?Text=Thumb${index + 1}`,
+            imageUrl: `https://via.placeholder.com/120/${index % 5 === 0 ? '283593' : index % 5 === 1 ? '43A047' : index % 5 === 2 ? 'F9A825' : index % 5 === 3 ? '1E88E5' : '757575'}/FFFFFF?Text=Item${index + 1}`,
             alt: `Thumbnail ${item.id}`,
           }))}
         />
         <SliderControls onNext={nextSlide} onPrev={prevSlide} />
         <ActiveContent activeItem={items[currentIndex]} />
-        <div className="mt-8 flex justify-end">
-          <RunningElement isActive={true} />
-        </div>
       </div>
     </div>
   );

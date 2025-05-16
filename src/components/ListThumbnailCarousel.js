@@ -6,7 +6,7 @@ function ListThumbnailCarousel({ activeIndex, onItemClick, thumbnails }) {
 
   useEffect(() => {
     if (carouselRef.current) {
-      carouselRef.current.scrollLeft = (activeIndex * (80 + 12)) - 60; // Adjusted scroll for spacing
+      carouselRef.current.scrollLeft = (activeIndex * (70 + 8)) - 35; // Adjusted scroll
     }
   }, [activeIndex]);
 
@@ -14,7 +14,7 @@ function ListThumbnailCarousel({ activeIndex, onItemClick, thumbnails }) {
     <div className="relative overflow-hidden mt-6">
       <div
         ref={carouselRef}
-        className="flex space-x-3 md:space-x-4 overflow-x-auto scroll-smooth py-2"
+        className="flex space-x-2 md:space-x-3 overflow-x-auto scroll-smooth py-2"
       >
         {thumbnails.map((thumbnail, index) => (
           <ThumbnailItem

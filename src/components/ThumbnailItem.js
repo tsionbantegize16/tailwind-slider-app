@@ -3,7 +3,7 @@ import React from 'react';
 function ThumbnailItem({ thumbnail, onClick, isActive }) {
   return (
     <div
-      className={`w-20 sm:w-24 flex-shrink-0 cursor-pointer rounded-md overflow-hidden shadow-sm transition-shadow duration-300 ${
+      className={`w-16 sm:w-20 flex-shrink-0 cursor-pointer rounded-md overflow-hidden shadow-sm transition-shadow duration-300 ${
         isActive ? 'border-2 border-primary shadow-md' : 'hover:shadow-md'
       }`}
       onClick={onClick}
