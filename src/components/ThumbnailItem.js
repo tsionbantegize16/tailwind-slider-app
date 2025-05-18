@@ -1,22 +1,22 @@
 // src/components/ThumbnailItem.js
 import React from 'react';
 
-function ThumbnailItem({ thumbnail, onClick, isActive }) {
+function ThumbnailItem({ thumbnail, onClick, isActive, isRounded }) {
+  const roundedClasses = isRounded ? 'rounded-full' : 'rounded-md';
+
   return (
     <div
-      className={`w-48 h-32 flex-shrink-0 cursor-pointer rounded-md overflow-hidden shadow-md ${
+      className={`w-32 h-20 flex-shrink-0 cursor-pointer overflow-hidden shadow-md ${roundedClasses} ${
         isActive ? 'border-2 border-blue-500' : 'hover:shadow-lg'
       } transition-shadow duration-300`}
       onClick={onClick}
     >
       <img
-        src={thumbnail.imageUrl} // Use the imported image URL from the thumbnail data
+        src={thumbnail.imageUrl}
         alt={thumbnail.alt || 'Thumbnail'}
         className="w-full h-full object-cover"
       />
-      <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white p-2 text-center text-sm">
-        {thumbnail.alt} {/* Use the alt text as the thumbnail name */}
-      </div>
+      {/* You might remove or style the text overlay */}
     </div>
   );
 }

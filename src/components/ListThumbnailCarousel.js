@@ -7,7 +7,9 @@ function ListThumbnailCarousel({ activeIndex, onItemClick, thumbnails }) {
 
   useEffect(() => {
     if (carouselRef.current) {
-      carouselRef.current.scrollLeft = (activeIndex * (192 + 16)) - 96;
+      const thumbnailWidth = 100; // Adjust as needed
+      const spacing = 16; // Adjust as needed
+      carouselRef.current.scrollLeft = (activeIndex * (thumbnailWidth + spacing)) - (window.innerWidth / 2 - (thumbnailWidth + spacing) / 2);
     }
   }, [activeIndex]);
 
@@ -23,6 +25,7 @@ function ListThumbnailCarousel({ activeIndex, onItemClick, thumbnails }) {
             thumbnail={thumbnail}
             onClick={() => onItemClick(index)}
             isActive={index === activeIndex}
+            isRounded={true} // Pass a prop for rounded styling
           />
         ))}
       </div>

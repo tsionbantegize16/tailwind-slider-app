@@ -9,16 +9,16 @@ config.autoAddCss = false;
 
 function SliderControls({ onNext, onPrev }) {
   return (
-    <div className="flex space-x-2">
+    <div className="flex space-x-4">
       <button
-        className="bg-gray-800 bg-opacity-50 hover:bg-opacity-70 text-white rounded-md p-2"
+        className="bg-gray-800 bg-opacity-50 hover:bg-opacity-70 text-white rounded-full w-10 h-10 flex items-center justify-center focus:outline-none"
         onClick={onPrev}
         aria-label="Previous Slide"
       >
         <FontAwesomeIcon icon={faChevronLeft} />
       </button>
       <button
-        className="bg-gray-800 bg-opacity-50 hover:bg-opacity-70 text-white rounded-md p-2"
+        className="bg-gray-800 bg-opacity-50 hover:bg-opacity-70 text-white rounded-full w-10 h-10 flex items-center justify-center focus:outline-none"
         onClick={onNext}
         aria-label="Next Slide"
       >
