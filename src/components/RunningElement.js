@@ -1,3 +1,4 @@
+// src/components/RunningElement.js
 import React from 'react';
 
 function RunningElement({ isActive }) {

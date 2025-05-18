@@ -5,7 +5,7 @@ function ListItem({ item }) {
   return (
     <div className="w-full flex-shrink-0 h-full">
       <img
-        src={`https://source.unsplash.com/random/1200x600?abstract&sig=${item.id}`}
+        src={item.image} // Use the imported image from the item data
         alt={item.title}
         className="w-full h-full object-cover"
       />

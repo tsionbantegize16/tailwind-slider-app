@@ -10,12 +10,12 @@ function ThumbnailItem({ thumbnail, onClick, isActive }) {
       onClick={onClick}
     >
       <img
-        src={thumbnail.imageUrl || 'https://via.placeholder.com/400x250'}
+        src={thumbnail.imageUrl} // Use the imported image URL from the thumbnail data
         alt={thumbnail.alt || 'Thumbnail'}
         className="w-full h-full object-cover"
       />
       <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white p-2 text-center text-sm">
-        Name Slider {/* Placeholder for thumbnail name */}
+        {thumbnail.alt} {/* Use the alt text as the thumbnail name */}
       </div>
     </div>
   );

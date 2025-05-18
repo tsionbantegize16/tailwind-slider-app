@@ -1,19 +1,28 @@
 // src/App.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import ListItemCarousel from './components/ListItemCarousel';
 import ListThumbnailCarousel from './components/ListThumbnailCarousel';
 import SliderControls from './components/SliderControls';
+import ActiveContent from './components/ActiveContent';
+import RunningElement from './components/RunningElement';
+import crowImage from './assets/crow.jpg';
+import heronImage from './assets/heron.jpeg';
+import owl1Image from './assets/owl1.jpg';
+import parrot2Image from './assets/parrot2.jpg';
 
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [items, setItems] = useState([
-    { id: 1, title: 'Modern Design', description: 'Explore contemporary design trends.' },
-    { id: 2, title: 'Creative Ideas', description: 'Discover innovative and inspiring concepts.' },
-    { id: 3, title: 'Unique Solutions', description: 'Presenting tailored solutions for your needs.' },
-    { id: 4, title: 'Stylish Elements', description: 'Showcasing elegant and fashionable components.' },
-    { id: 5, title: 'Inspiring Visions', description: 'Sharing creative visions for the future.' },
-  ]);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const autoPlayInterval = useRef(null);
+  const items = [
+    { id: 1, title: 'Majestic Crow', description: 'A symbol of mystery and intelligence.', image: crowImage },
+    { id: 2, title: 'Elegant Heron', description: 'Graceful and patient hunter by the water.', image: heronImage },
+    { id: 3, title: 'Wise Owl', description: 'The silent observer with piercing eyes.', image: owl1Image },
+    { id: 4, title: 'Vibrant Parrot', description: 'A splash of color and sound in the canopy.', image: parrot2Image },
+  ];
+  const thumbnails = items.map(item => ({ id: item.id, imageUrl: item.image, alt: item.title }));
+  const activeItem = items[currentIndex];
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
@@ -25,34 +34,50 @@ function App() {
 
   const handleThumbnailClick = (index) => {
     setCurrentIndex(index);
+    setIsAutoPlaying(false);
+    if (autoPlayInterval.current) clearInterval(autoPlayInterval.current);
   };
 
+  useEffect(() => {
+    if (isAutoPlaying) {
+      autoPlayInterval.current = setInterval(() => {
+        nextSlide();
+      }, 5000);
+    } else {
+      if (autoPlayInterval.current) clearInterval(autoPlayInterval.current);
+    }
+
+    return () => {
+      if (autoPlayInterval.current) clearInterval(autoPlayInterval.current);
+    };
+  }, [isAutoPlaying, nextSlide]);
+
   return (
-    <div className="bg-black min-h-screen text-white font-sans">
+    <div className="bg-gray-900 min-h-screen text-white font-sans py-8">
       <Header />
-      <div className="relative container mx-auto px-4 py-12">
-        <div className="relative rounded-lg overflow-hidden shadow-xl">
-          <div className="absolute inset-0 bg-black opacity-40"></div>
+      <div className="container mx-auto px-4">
+        <div className="relative">
           <ListItemCarousel currentIndex={currentIndex} items={items} />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full px-8">
-            <div className="text-sm text-gray-300 uppercase tracking-widest mb-2">Showcase</div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">{items[currentIndex]?.title}</h2>
-            <p className="text-gray-300 leading-relaxed max-w-lg mx-auto">{items[currentIndex]?.description}</p>
+          <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
+            <SliderControls onPrev={prevSlide} onNext={nextSlide} />
           </div>
-          <div className="absolute top-1/2 right-4 transform -translate-y-1/2 flex space-x-2">
-            <SliderControls onNext={nextSlide} onPrev={prevSlide} />
+          <div className="absolute top-1/2 right-4 transform -translate-y-1/2">
+            <RunningElement isActive={isAutoPlaying} />
           </div>
         </div>
-        <div className="mt-8 overflow-x-auto">
-          <ListThumbnailCarousel
-            activeIndex={currentIndex}
-            onItemClick={handleThumbnailClick}
-            thumbnails={items.map((item, index) => ({
-              id: item.id,
-              imageUrl: `https://source.unsplash.com/random/400x250?abstract&sig=${index}`,
-              alt: `Thumbnail ${item.title}`,
-            }))}
-          />
+        <ListThumbnailCarousel
+          activeIndex={currentIndex}
+          onItemClick={handleThumbnailClick}
+          thumbnails={thumbnails}
+        />
+        <ActiveContent activeItem={activeItem} />
+        <div className="mt-4 text-center">
+          <button
+            className={`px-4 py-2 rounded-md ${isAutoPlaying ? 'bg-red-500 hover:bg-red-700' : 'bg-green-500 hover:bg-green-700'} text-white`}
+            onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+          >
+            {isAutoPlaying ? 'Stop Auto-Play' : 'Start Auto-Play'}
+          </button>
         </div>
       </div>
     </div>

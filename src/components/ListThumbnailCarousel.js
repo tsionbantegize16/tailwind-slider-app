@@ -7,7 +7,7 @@ function ListThumbnailCarousel({ activeIndex, onItemClick, thumbnails }) {
 
   useEffect(() => {
     if (carouselRef.current) {
-      carouselRef.current.scrollLeft = (activeIndex * (192 + 16)) - 96; // Adjusted for thumbnail width and spacing
+      carouselRef.current.scrollLeft = (activeIndex * (192 + 16)) - 96;
     }
   }, [activeIndex]);
 
